@@ -34,7 +34,7 @@ when "rhel"
 
   yum_repository "erlang" do
     name "EPELErlangrepo"
-    url "http://repos.fedorapeople.org/repos/peter/erlang/epel-5Server/$basearch"
+    url #{node['erlang']['rhel_erlang_repo']
     description "Updated erlang yum repository for RedHat / Centos 5.x - #{node['kernel']['machine']}"
     action :add
     only_if { node['platform_version'].to_f >= 5.0 && node['platform_version'].to_f < 6.0 }

@@ -26,10 +26,10 @@ when 'debian'
   include_recipe 'apt'
 
   apt_repository 'erlang_solutions_repo' do
-    uri 'http://binaries.erlang-solutions.com/debian'
+    uri "#{node['erlang']['erlang_binaries']}/debian"
     distribution node['erlang']['esl']['lsb_codename']
     components ['contrib']
-    key 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc'
+    key "#{node['erlang']['erlang_binaries']}/debian/erlang_solutions.asc"
     action :add
   end
 
@@ -50,7 +50,7 @@ when 'rhel'
 
       yum_key "RPM-KEY-Erlang-Solutions" do
         # Yes, yes, I know the URL has 'debian' in it... that's the address
-        url "http://binaries.erlang-solutions.com/debian/erlang_solutions.asc"
+        url "#{node['erlang']['erlang_binaries']}/debian/erlang_solutions.asc"
         action :add
       end
 
@@ -59,7 +59,7 @@ when 'rhel'
       #   http://binaries.erlang-solutions.com/rpm/centos/erlang_solutions.repo
       yum_repository "erlang-solutions" do
         description "#{node['platform']} $releasever - $basearch - Erlang Solutions"
-        url "http://binaries.erlang-solutions.com/rpm/#{node['platform']}/$releasever/$basearch"
+        url "#{node['erlang']['erlang_binaries']}/rpm/#{node['platform']}/$releasever/$basearch"
         key "RPM-KEY-Erlang-Solutions"
         enabled 1
       end
